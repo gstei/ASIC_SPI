@@ -1,0 +1,9 @@
+*.log
+*.jou
+
+.Xil/*
+.library_mapping.xml
+.project
+.settings/*
+*.hsr.ch
+*.pb
