@@ -5,21 +5,21 @@ library controller_pkg;
 use controller_pkg.all;
 
 
-entity tb_mcu is
+entity tb_controller is
 --  Port ( );
-end tb_mcu;
+end tb_controller;
 
-architecture Behavioral of tb_mcu is
+architecture Behavioral of tb_controller is
     signal led : std_logic_vector (3 downto 0);
     signal btn : std_logic_vector (3 downto 0);
-    component mcu
+    component controller
       Port ( 
         led : out std_logic_vector (3 downto 0);
         btn : in std_logic_vector (3 downto 0)
       );
     end component;
 begin
-    DUT : mcu
+    DUT : controller
         port map(
             led => led,
             btn => btn

@@ -83,8 +83,7 @@ fi
 OPTIONS=h #short options -h
 ## Give below all the long options,every other short option will be handled as error
 ## No whitespaces between the option is allowd!
-LONGOPTS=help,op:,gen_bit,sim_uart,\
-sim_smi,sim_ssi,sim_i2c,sim_quad_spi,sim_top
+LONGOPTS=help,op:,sim_controller
 ## -regarding and PIPESTATUS see above
 ## -temporarily store output to be able to check for errors
 ## -activate quoting/enhanced mode (e.g.by writing out --options)
@@ -136,7 +135,7 @@ while [ $# -gt 0 ]; do
             echo -e "${GRE}General:${RCOL}"
             echo -e " -h, \t--help \t\t This smallusage guide"
             echo -e " \t--op \t \t define operating system ${BBLA}win${RCOL}(windows) or ${BBLA}lin${RCOL}(linux==>default)"
-            echo -e " \t--sim_top \t strat testbench"
+            echo -e " \t--sim_controller \t strat testbench"
             exit
             shift
             ;;
@@ -153,7 +152,7 @@ while [ $# -gt 0 ]; do
             fi
             shift
             ;;
-        --sim_top)
+        --sim_controller)
             set_function_to_execute top_simulation
             shift
             ;;
@@ -179,28 +178,24 @@ f_start_tcl() {
     if [ $OPERATING_SYSTEM = "LINUX" ]; then
         if ! command -v vivado &> /dev/null
             then echo "vivado could not be found"
-            exit 
-        fi
-        if [ -d vivado]; then
-            (cd $PROJECT_HOME/controller; vivado -mode batch -source $PROJECT_HOME/scripts/"$tcl_file".tcl)
-        else
-            echo "Error: Vivado does not exist"
             echo "Have you selected the correct operating system"
             echo "call \".build.sh -h\" for more information"
             exit 1
+        else
+            (cd $PROJECT_HOME/controller; vivado -mode batch -source $PROJECT_HOME/scripts/"$tcl_file".tcl)
         fi
     elif [ $OPERATING_SYSTEM = "WINDOWS" ]; then
         (cd $PROJECT_HOME/controller; cmd.exe /c vivado -mode batch -source ../scripts/"$tcl_file".tcl)
     fi
 
     echo -e "Copy .log file to output directory"
-    cp -v -f "$PROJECT_HOME"/controller/vivado/fpga_top.sim/simset/behav/xsim/simulate.log "$PROJECT_HOME"/controller/output/
+    cp -v -f "$PROJECT_HOME"/controller/vivado/controller.sim/simset/behav/xsim/simulate.log "$PROJECT_HOME"/controller/output/
 }
 
 f_execute (){
     case $FUNCTION_TO_EXECUTE in 
         top_simulation)
-            f_start_tcl TOP_simulation
+            f_start_tcl simulate_me
             ;;
         *)
             echo "unknown"

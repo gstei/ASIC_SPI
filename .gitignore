@@ -1,9 +1,15 @@
 *.log
 *.jou
+*.bak
 
-.Xil/*
+*.Xil/*
 .library_mapping.xml
 .project
 .settings/*
 *.hsr.ch
 *.pb
+project_1/*
+vivado/*
+controller/vivado/*
+scripts/vivado/*
+*.nfs*
