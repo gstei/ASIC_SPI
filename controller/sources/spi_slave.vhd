@@ -1,3 +1,9 @@
+
+-- Source code from https://surf-vhdl.com/spi-slave-vhdl-design/
+-- Modified by Matthias Meyer
+-- 16/12/2022
+
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -38,13 +44,14 @@ end process p_spi_slave_input;
 p_spi_slave_output : process(i_sclk,i_ss)
 begin
   if(i_ss='1') then
-    r_shift_ena            <= '0';
+    r_shift_ena             <= '0';
+    o_miso                  <= 'Z';
   elsif(i_sclk'event and i_sclk= not CPOL) then -- CPOL='0' => falling edge; CPOL='1' => risinge edge
     r_shift_ena            <= '1';
     if(r_shift_ena='0') then
       o_miso                 <= i_data_parallel(N-1);
       r_tx_data              <= i_data_parallel(N-2 downto 0);
-    else
+  else
       o_miso                 <= r_tx_data(N-2);
       r_tx_data              <= r_tx_data(N-3 downto 0)&'0';
     end if;
