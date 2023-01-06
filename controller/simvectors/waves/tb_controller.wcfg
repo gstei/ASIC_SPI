@@ -12,12 +12,12 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="33.850001 us"></ZoomEndTime>
-      <Cursor1Time time="9.450000 us"></Cursor1Time>
+      <ZoomEndTime time="44.245395 us"></ZoomEndTime>
+      <Cursor1Time time="22.025241 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="222"></NameColumnWidth>
-      <ValueColumnWidth column_width="100"></ValueColumnWidth>
+      <ValueColumnWidth column_width="96"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="9" />
    <wvobject type="logic" fp_name="/tb_controller/rst">
@@ -77,7 +77,6 @@
          <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[0]">
             <obj_property name="ElementShortName">[0][7:0]</obj_property>
             <obj_property name="ObjectShortName">[0][7:0]</obj_property>
-            <obj_property name="Radix">BINARYRADIX</obj_property>
          </wvobject>
          <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[1]">
             <obj_property name="ElementShortName">[1][7:0]</obj_property>

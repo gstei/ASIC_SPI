@@ -28,12 +28,12 @@ end top;
 
 
 architecture rtl of top is
-    signal busy             : std_logic := '0';                 --when 1 == data is transmitted over spie
+    signal busy             : std_logic := '0';                 --when 1 then data is transmitted over spi
     signal spi_to_controller: std_logic_vector(DW-1 downto 0);
     signal spi_to_controller_inverted: std_logic_vector(DW-1 downto 0);
     signal controller_to_spi: std_logic_vector(DW-1 downto 0);
 
-
+    --declare components
     component ctrl is
     generic(
         AW                          : integer := 3; 
@@ -63,6 +63,7 @@ architecture rtl of top is
     end component;
 
 begin
+    --instanciate components
     I1: spi_slave 
     generic map(
         N       =>  DW,

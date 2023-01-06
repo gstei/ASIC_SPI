@@ -1,3 +1,6 @@
+-- Created by Matthias Meyer
+-- 16/12/2022
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -19,9 +22,9 @@ architecture rtl of ctrl is
     type state is (S0, S1, S2, S3);
     signal c_st, n_st : state;
     --define ram
-    type t_ram is array (0 to 2**AW-1) of
+    type t_register is array (0 to 2**AW-1) of
     std_logic_vector(DW-1 downto 0);
-    signal ram : t_ram := ((others=> (others=>'0')));
+    signal ram : t_register := ((others=> (others=>'0')));
 begin
     -- memorizing process
     p_seq: process (rst, clk)
