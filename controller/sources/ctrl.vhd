@@ -4,17 +4,18 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+library work;
+use work.ctrl_pkg.all;
 
 entity ctrl is
-generic(
-    AW                          : integer := 3;             -- Address width for Registers
-    DW                          : integer := 8);            -- Data width of a register
+--generic();            -- Data width of a register
 Port ( 
     o_busy                      : in std_logic;                             -- spi is receiving data if '1' ==> i_data_from_spi is not stable
-    o_data_to_spi               : out  std_logic_vector(DW-1 downto 0);     -- register which is sent to spi
-    i_data_from_spi             : in std_logic_vector(DW-1 downto 0);       -- register received from spi
+    o_data_to_spi               : out  std_logic_vector(c_DW-1 downto 0);     -- register which is sent to spi
+    i_data_from_spi             : in std_logic_vector(c_DW-1 downto 0);       -- register received from spi
     clk                         : in std_logic;                             -- clk for module
-    rst                         : in std_logic                              -- reset signal for module
+    rst                         : in std_logic;                              -- reset signal for module
+    o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)      --output register
   );
 end ctrl;
 
@@ -22,10 +23,10 @@ architecture rtl of ctrl is
     type state is (S0, S1, S2, S3);
     signal c_st, n_st : state;
     --define ctrl_reg
-    type t_register is array (0 to 2**AW-1) of
-    std_logic_vector(DW-1 downto 0);
     signal ctrl_reg : t_register := ((others=> (others=>'0')));
 begin
+    --
+    o_register <= to_slv(ctrl_reg);
     -- memorizing process
     p_seq: process (rst, clk)
     begin

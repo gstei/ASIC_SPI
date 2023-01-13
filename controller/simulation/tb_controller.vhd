@@ -16,6 +16,7 @@ architecture Behavioral of tb_controller is
     signal i_ss   : std_logic := '1';
     signal i_mosi : std_logic := '0';
     signal o_miso : std_logic := '0';
+    signal o_register : std_logic_vector(2**c_AW*c_DW-1 downto 0) := (others=>'0');
     constant clk_period : time := 10 ns;
     component top
       Port ( 
@@ -24,7 +25,8 @@ architecture Behavioral of tb_controller is
         i_sclk                      : in  std_logic;
         i_ss                        : in  std_logic;
         i_mosi                      : in  std_logic;
-        o_miso                      : out std_logic
+        o_miso                      : out std_logic;
+        o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)
       );
     end component;
 begin
@@ -35,7 +37,8 @@ begin
             i_sclk		=> i_sclk,	
             i_ss  		=> i_ss,  	
             i_mosi		=> i_mosi,	
-            o_miso		=> o_miso	
+            o_miso		=> o_miso,
+            o_register	=> o_register
     );
     
     -- Clock process definitions( clock with 50% duty cycle is generated here.

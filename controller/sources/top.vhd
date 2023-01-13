@@ -9,10 +9,7 @@ library work;
 use work.ctrl_pkg.all;
 
 entity top is
-generic(
-    AW                          : integer := 3;     --Number of Registers = 2**AW
-    DW                          : integer := 8;     --Data width of a Register
-    MSB_LSB                     : std_logic := '0');   --MSB first(0) or LSB(1) first
+--generic();   --MSB first(0) or LSB(1) first
 Port ( 
     clk                         : in std_logic;
     rst                         : in std_logic;
@@ -20,7 +17,8 @@ Port (
     i_sclk                      : in  std_logic;
     i_ss                        : in  std_logic;
     i_mosi                      : in  std_logic;
-    o_miso                      : out std_logic
+    o_miso                      : out std_logic;
+    o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)
   );
 end top;
 
@@ -29,28 +27,27 @@ end top;
 
 architecture rtl of top is
     signal busy             : std_logic := '0';                 --when 1 then data is transmitted over spi
-    signal spi_to_controller: std_logic_vector(DW-1 downto 0);
-    signal spi_to_controller_inverted: std_logic_vector(DW-1 downto 0);
-    signal controller_to_spi: std_logic_vector(DW-1 downto 0);
+    signal spi_to_controller: std_logic_vector(c_DW-1 downto 0);
+    signal spi_to_controller_inverted: std_logic_vector(c_DW-1 downto 0);
+    signal controller_to_spi: std_logic_vector(c_DW-1 downto 0);
 
     --declare components
     component ctrl is
-    generic(
-        AW                          : integer := 3; 
-        DW                          : integer := 8);
+    --generic();
     Port ( 
         o_busy                      : in std_logic;  -- receiving data if '1'
-        o_data_to_spi               : out  std_logic_vector(DW-1 downto 0);  -- data received from spi
-        i_data_from_spi             : in std_logic_vector(DW-1 downto 0);  -- data to send to spi
+        o_data_to_spi               : out  std_logic_vector(c_DW-1 downto 0);  -- data received from spi
+        i_data_from_spi             : in std_logic_vector(c_DW-1 downto 0);  -- data to send to spi
         clk                         : in std_logic;
-        rst                         : in std_logic
+        rst                         : in std_logic;
+        o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)
       );
     end component;
   
   
     component spi_slave is
     generic(
-      N                     : integer := 8;      -- number of bit to serialize
+      N                     : integer := c_DW;      -- number of bit to serialize
       CPOL                  : std_logic := '0' );  -- clock polarity
      port (
       o_busy                      : out std_logic;  -- receiving data if '1'
@@ -66,7 +63,7 @@ begin
     --instanciate components
     I1: spi_slave 
     generic map(
-        N       =>  DW,
+        N       =>  c_DW,
         CPOL    =>  '0'
     )
     port map(
@@ -78,20 +75,18 @@ begin
 	i_mosi                      => i_mosi,
 	o_miso                      => o_miso);
 	
-	spi_to_controller_inverted <=  spi_to_controller                       when MSB_LSB='0' else
+	spi_to_controller_inverted <=  spi_to_controller                       when c_MSB_LSB='0' else
 	                               reverse_any_vector(spi_to_controller);
 	
 	I2: ctrl
-	generic map(
-        DW =>   DW,
-        AW =>   AW
-    )
+	--generic map()
     port map(
 	o_busy                      => busy,
 	o_data_to_spi               => controller_to_spi,
 	i_data_from_spi             => spi_to_controller_inverted,
 	clk                         => clk,
-	rst                         => rst);
+	rst                         => rst,
+    o_register                  => o_register);
 end rtl;
 
 

@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="44.245395 us"></ZoomEndTime>
+      <ZoomEndTime time="50.495391 us"></ZoomEndTime>
       <Cursor1Time time="22.025241 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="222"></NameColumnWidth>
-      <ValueColumnWidth column_width="96"></ValueColumnWidth>
+      <ValueColumnWidth column_width="92"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="9" />
+   <WVObjectSize size="10" />
    <wvobject type="logic" fp_name="/tb_controller/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
@@ -70,76 +70,6 @@
       <obj_property name="label">ctrl</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram">
-         <obj_property name="ElementShortName">ram[0:7][7:0]</obj_property>
-         <obj_property name="ObjectShortName">ram[0:7][7:0]</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[0]">
-            <obj_property name="ElementShortName">[0][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[0][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[1]">
-            <obj_property name="ElementShortName">[1][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[1][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[2]">
-            <obj_property name="ElementShortName">[2][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[2][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[3]">
-            <obj_property name="ElementShortName">[3][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[3][7:0]</obj_property>
-            <obj_property name="Radix">BINARYRADIX</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[4]">
-            <obj_property name="ElementShortName">[4][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[4][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[5]">
-            <obj_property name="ElementShortName">[5][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[5][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[6]">
-            <obj_property name="ElementShortName">[6][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[6][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[7]">
-            <obj_property name="ElementShortName">[7][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[7][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[0]">
-            <obj_property name="ElementShortName">[0][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[0][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[1]">
-            <obj_property name="ElementShortName">[1][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[1][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[2]">
-            <obj_property name="ElementShortName">[2][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[2][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[3]">
-            <obj_property name="ElementShortName">[3][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[3][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[4]">
-            <obj_property name="ElementShortName">[4][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[4][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[5]">
-            <obj_property name="ElementShortName">[5][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[5][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[6]">
-            <obj_property name="ElementShortName">[6][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[6][7:0]</obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/tb_controller/DUT/I2/ram[7]">
-            <obj_property name="ElementShortName">[7][7:0]</obj_property>
-            <obj_property name="ObjectShortName">[7][7:0]</obj_property>
-         </wvobject>
-      </wvobject>
       <wvobject type="array" fp_name="/tb_controller/DUT/I2/o_data_to_spi">
          <obj_property name="ElementShortName">o_data_to_spi[7:0]</obj_property>
          <obj_property name="ObjectShortName">o_data_to_spi[7:0]</obj_property>
@@ -156,5 +86,9 @@
          <obj_property name="ElementShortName">c_st</obj_property>
          <obj_property name="ObjectShortName">c_st</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_controller/o_register">
+      <obj_property name="ElementShortName">o_register[63:0]</obj_property>
+      <obj_property name="ObjectShortName">o_register[63:0]</obj_property>
    </wvobject>
 </wave_config>

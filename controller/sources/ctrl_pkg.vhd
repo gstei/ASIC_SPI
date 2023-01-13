@@ -11,7 +11,14 @@ use IEEE.NUMERIC_STD.ALL;
 
 
 package ctrl_pkg is
+constant c_AW               : integer := 3;     --Number of Registers = 2**AW
+constant c_DW               : integer := 8;     --Data width of a Register
+constant c_MSB_LSB          : std_logic := '0';   --MSB first(0) or LSB(1) first
+type t_register is array (0 to 2**c_AW-1) of
+    std_logic_vector(c_DW-1 downto 0);
 function reverse_any_vector (a: in std_logic_vector) return std_logic_vector;
+function to_slv(slvv : t_register) return STD_LOGIC_VECTOR;
+
 end ctrl_pkg;
 -- Package Implementation -------------------
 package body ctrl_pkg is
@@ -25,5 +32,17 @@ function reverse_any_vector (a: in std_logic_vector)
         result(i) := aa(i);
       end loop;
       return result;
-    end; -- function reverse_any_vector
+  end; -- function reverse_any_vector
+  
+subtype T_SLV_32  is STD_LOGIC_VECTOR(31 downto 0);
+
+
+function to_slv(slvv : t_register) return STD_LOGIC_VECTOR is
+  variable slv : STD_LOGIC_VECTOR((slvv'length * 8) - 1 downto 0);
+begin
+  for i in slvv'range loop
+    slv((i * 8) + 7 downto (i * 8))      := slvv(i);
+  end loop;
+  return slv;
+end function;
 end ctrl_pkg;
