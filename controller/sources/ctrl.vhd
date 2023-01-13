@@ -11,11 +11,14 @@ entity ctrl is
 --generic();            -- Data width of a register
 Port ( 
     o_busy                      : in std_logic;                             -- spi is receiving data if '1' ==> i_data_from_spi is not stable
-    o_data_to_spi               : out  std_logic_vector(c_DW-1 downto 0);     -- register which is sent to spi
-    i_data_from_spi             : in std_logic_vector(c_DW-1 downto 0);       -- register received from spi
+    --o_data_to_spi               : out  std_logic_vector(c_DW-1 downto 0);     -- register which is sent to spi
+    --i_data_from_spi             : in std_logic_vector(c_DW-1 downto 0);       -- register received from spi
+    o_data_to_spi               : out  std_logic_vector(8 downto 0);     -- register which is sent to spi
+    i_data_from_spi             : in std_logic_vector(8 downto 0);       -- register received from spi
     clk                         : in std_logic;                             -- clk for module
     rst                         : in std_logic;                              -- reset signal for module
-    o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)      --output register
+    --o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)      --output register
+    o_register                  : out std_logic_vector(63 downto 0)      --output register
   );
 end ctrl;
 

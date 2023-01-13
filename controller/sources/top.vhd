@@ -18,7 +18,8 @@ Port (
     i_ss                        : in  std_logic;
     i_mosi                      : in  std_logic;
     o_miso                      : out std_logic;
-    o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)
+    --o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)
+    o_register                  : out std_logic_vector(63 downto 0)
   );
 end top;
 
