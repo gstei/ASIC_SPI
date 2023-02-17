@@ -14,8 +14,8 @@ generic(
   CPOL                  : std_logic := '0' );  -- clock polarity
  port (
   o_busy                      : out std_logic;  -- receiving data if '1'
-  i_data_parallel             : in  std_logic_vector(N-1 downto 0);  -- data to sent
-  o_data_parallel             : out std_logic_vector(N-1 downto 0);  -- received data
+  i_data_parallel             : in  std_logic_vector(7 downto 0);  -- data to sent
+  o_data_parallel             : out std_logic_vector(7 downto 0);  -- received data
   i_sclk                      : in  std_logic;
   i_ss                        : in  std_logic;
   i_mosi                      : in  std_logic;

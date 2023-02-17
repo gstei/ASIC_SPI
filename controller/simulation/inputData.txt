@@ -1,11 +1,21 @@
 #This is a comment
 
-400 ns 200 ns 0 03 # write AA to register one, this should not work, since it is read only
-400 ns 200 ns 0 55 # write AA to register one, this should not work, since it is read only
-400 ns 200 ns 0 05 # write FF to register two, this should work
-400 ns 200 ns 0 FF # write FF to register two, this should work
-400 ns 200 ns 0 09 # write AA to register four, this should work
-400 ns 200 ns 0 AA # write AA to register four, this should work
+4000 ns 2000 ns 0 03 # write AA to register one, this should not work, since it is read only
+4000 ns 2000 ns 0 55 # write AA to register one, this should not work, since it is read only
+4000 ns 2000 ns 0 05 # write 02 to register two, this should work
+4000 ns 2000 ns 0 02 # write 02 to register two, this should work and outputs bandgap voltage on a_tp
+4000 ns 2000 ns 0 05 # write 03 to register two, this should work
+4000 ns 2000 ns 0 03 # write 03 to register two, this should work and output clock on a_tp
+4000 ns 2000 ns 0 05 # write 04 to register two, this should work
+4000 ns 2000 ns 0 04 # write 04 to register two, this should work and vbootref on a_tp
+4000 ns 2000 ns 0 05 # write 05 to register two, this should work
+4000 ns 2000 ns 0 05 # write 05 to register two, this should work and ibootref on a_tp
+4000 ns 2000 ns 0 05 # write 06 to register two, this should work
+4000 ns 2000 ns 0 06 # write 06 to register two, this should work and por_b on a_tp
+4000 ns 2000 ns 0 05 # write 07 to register two, this should work
+4000 ns 2000 ns 0 07 # write 07 to register two, this should work and por on a_tp
+4000 ns 2000 ns 0 09 # write AA to register four, this should work
+4000 ns 2000 ns 0 AA # write AA to register four, this should work
 
-400 ns 200 ns 1 00 # make a reset
-400 ns 200 ns 0 00 # make a reset
+4000 ns 2000 ns 1 00 # make a reset
+4000 ns 2000 ns 0 00 # make a reset
