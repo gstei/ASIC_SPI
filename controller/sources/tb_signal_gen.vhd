@@ -46,6 +46,7 @@ begin
         i_sclk <= '0';
         i_mosi <= '0';
         rst <= '0';
+        wait for 30 us;
         while not endfile(text_file) loop
             readline(text_file, text_line);
             

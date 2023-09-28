@@ -19,7 +19,8 @@ generic(
   i_sclk                      : in  std_logic;
   i_ss                        : in  std_logic;
   i_mosi                      : in  std_logic;
-  o_miso                      : out std_logic);
+  o_miso                      : out std_logic;
+  o_miso_en                   : out std_logic);
 end spi_slave;
 
 architecture rtl of spi_slave is
@@ -42,16 +43,21 @@ begin
 end process p_spi_slave_input;
 
 p_spi_slave_output : process(i_sclk,i_ss)
+
 begin
+  
   if(i_ss='1') then
     r_shift_ena             <= '0';
-    o_miso                  <= 'Z';
+    o_miso                  <= '0';
+    o_miso_en               <= '1';
   elsif(i_sclk'event and i_sclk= not CPOL) then -- CPOL='0' => falling edge; CPOL='1' => risinge edge
     r_shift_ena            <= '1';
     if(r_shift_ena='0') then
+      o_miso_en              <= '0';
       o_miso                 <= i_data_parallel(N-1);
       r_tx_data              <= i_data_parallel(N-2 downto 0);
-  else
+    else
+      o_miso_en              <= '0';
       o_miso                 <= r_tx_data(N-2);
       r_tx_data              <= r_tx_data(N-3 downto 0)&'0';
     end if;

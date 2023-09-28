@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="91.646259 us"></ZoomEndTime>
-      <Cursor1Time time="4.364108 us"></Cursor1Time>
+      <ZoomEndTime time="1,119.500001 us"></ZoomEndTime>
+      <Cursor1Time time="98.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="222"></NameColumnWidth>
-      <ValueColumnWidth column_width="84"></ValueColumnWidth>
+      <NameColumnWidth column_width="194"></NameColumnWidth>
+      <ValueColumnWidth column_width="86"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="17" />
+   <WVObjectSize size="20" />
    <wvobject type="logic" fp_name="/tb_controller/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
@@ -44,6 +44,10 @@
       <obj_property name="ElementShortName">o_miso</obj_property>
       <obj_property name="ObjectShortName">o_miso</obj_property>
    </wvobject>
+   <wvobject type="logic" fp_name="/tb_controller/DUT/I1/o_miso_en">
+      <obj_property name="ElementShortName">o_miso_en</obj_property>
+      <obj_property name="ObjectShortName">o_miso_en</obj_property>
+   </wvobject>
    <wvobject type="other" fp_name="/tb_controller/clk_period">
       <obj_property name="ElementShortName">clk_period</obj_property>
       <obj_property name="ObjectShortName">clk_period</obj_property>
@@ -51,7 +55,6 @@
    <wvobject type="group" fp_name="group16">
       <obj_property name="label">SPI</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/tb_controller/DUT/I1/o_busy">
          <obj_property name="ElementShortName">o_busy</obj_property>
          <obj_property name="ObjectShortName">o_busy</obj_property>
@@ -341,5 +344,62 @@
          <obj_property name="ElementShortName">[48]</obj_property>
          <obj_property name="ObjectShortName">[48]</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="vbus1035">
+      <obj_property name="label">a_signal</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[11]">
+         <obj_property name="ElementShortName">[11]</obj_property>
+         <obj_property name="ObjectShortName">[11]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[10]">
+         <obj_property name="ElementShortName">[10]</obj_property>
+         <obj_property name="ObjectShortName">[10]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[9]">
+         <obj_property name="ElementShortName">[9]</obj_property>
+         <obj_property name="ObjectShortName">[9]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[8]">
+         <obj_property name="ElementShortName">[8]</obj_property>
+         <obj_property name="ObjectShortName">[8]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[7]">
+         <obj_property name="ElementShortName">[7]</obj_property>
+         <obj_property name="ObjectShortName">[7]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[6]">
+         <obj_property name="ElementShortName">[6]</obj_property>
+         <obj_property name="ObjectShortName">[6]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[5]">
+         <obj_property name="ElementShortName">[5]</obj_property>
+         <obj_property name="ObjectShortName">[5]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[4]">
+         <obj_property name="ElementShortName">[4]</obj_property>
+         <obj_property name="ObjectShortName">[4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[3]">
+         <obj_property name="ElementShortName">[3]</obj_property>
+         <obj_property name="ObjectShortName">[3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[2]">
+         <obj_property name="ElementShortName">[2]</obj_property>
+         <obj_property name="ObjectShortName">[2]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[1]">
+         <obj_property name="ElementShortName">[1]</obj_property>
+         <obj_property name="ObjectShortName">[1]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_controller/o_analog_p[0]">
+         <obj_property name="ElementShortName">[0]</obj_property>
+         <obj_property name="ObjectShortName">[0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_controller/o_analog_p">
+      <obj_property name="ElementShortName">o_analog_p[255:0]</obj_property>
+      <obj_property name="ObjectShortName">o_analog_p[255:0]</obj_property>
    </wvobject>
 </wave_config>

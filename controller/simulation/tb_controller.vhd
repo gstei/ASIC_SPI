@@ -17,6 +17,7 @@ architecture rtl of tb_controller is
     signal i_mosi : std_logic := '0';
     signal o_miso : std_logic := '0';
     signal o_register : std_logic_vector(2**c_AW*c_DW-1 downto 0) := (others=>'0');
+    signal o_analog_p : STD_LOGIC_VECTOR(31 DOWNTO 0);
     constant clk_period : time := 10 ns;
     component top
       Port ( 
@@ -26,7 +27,8 @@ architecture rtl of tb_controller is
         i_ss                        : in  std_logic;
         i_mosi                      : in  std_logic;
         o_miso                      : out std_logic;
-        o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)
+        o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0);
+        o_analog_p : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
       );
     end component;
     component tb_signal_gen
@@ -46,7 +48,8 @@ begin
             i_ss  		=> i_ss,  	
             i_mosi		=> i_mosi,	
             o_miso		=> o_miso,
-            o_register	=> o_register
+            o_register	=> o_register,
+            o_analog_p  => o_analog_p
     );
     SIGNAL_GEN : tb_signal_gen
         port map(
