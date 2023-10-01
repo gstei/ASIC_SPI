@@ -12,4 +12,11 @@ project_1/*
 vivado/*
 controller/vivado/*
 scripts/vivado/*
+digital_flow/log/*
+digital_flow/results/*
+digital_flow/reports/*
+digital_flow/log/*
+report/*
+report.txt
+transcript
 *.nfs*
