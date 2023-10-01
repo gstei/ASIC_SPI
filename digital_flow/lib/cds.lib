@@ -1,0 +1,4 @@
+DEFINE D_CELLSL_5V		/opt/cds_dk/xfab/XKIT/xh035/diglibs/D_CELLSL_5V/v3_1/cadence_IC61/v3_1_2/D_CELLSL_5V
+DEFINE TECH_XH035		/opt/cds_dk/xfab/XKIT/xh035/cadence/v6_6/PDK/IC61/v6_6_2_1/TECH_XH035_1121
+
+DEFINE Lib1 /mnt/imesl/Projects/MSE_PA_Jansky_Meyer/Lib1
