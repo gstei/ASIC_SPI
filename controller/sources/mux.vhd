@@ -34,6 +34,9 @@ begin
                 end if;
             else
                 delay_line <= (others => '0');
+                output_s <= (others => '1');
+                bit_position := to_integer(unsigned(input_s));
+                output_s(bit_position) <= '0';
             end if;
         end if;
     end process;
