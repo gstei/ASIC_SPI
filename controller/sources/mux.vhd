@@ -7,14 +7,14 @@ use ieee.numeric_std.all;
 
 entity mux is
     Port (
-        input_s : in std_logic_vector(5 downto 0);
+        input_s : in std_logic_vector(4 downto 0);
         clk : in std_logic;
         output_s : out std_logic_vector(31 downto 0)
     );
 end mux;
 
 architecture rtl of mux is
-    signal prev_input_s: std_logic_vector(5 downto 0);
+    signal prev_input_s: std_logic_vector(4 downto 0);
     signal delay_line : std_logic_vector(7 downto 0) := (others => '0');
 begin
     process(clk)
@@ -36,8 +36,8 @@ begin
                 delay_line <= (others => '0');
                 output_s <= (others => '1');
                 bit_position := to_integer(unsigned(input_s));
-                output_s(bit_position) <= '0';
+                    output_s(bit_position) <= '0';
             end if;
         end if;
     end process;
-end rtl;
+end rtl; 

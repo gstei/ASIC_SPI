@@ -65,8 +65,8 @@ setAttribute -net {*} -top_preferred_routing_layer 3
 # ----------------------------------------------------------
 # Create floorplan
 # ----------------------------------------------------------
-set coreWidth 1000
-set coreHeight 100
+set coreWidth 1040
+set coreHeight 60
 set borderWidth 5
 set powerWidth 2
 set powerSpacing 1

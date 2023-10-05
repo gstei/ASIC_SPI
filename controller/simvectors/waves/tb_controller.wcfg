@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="1,119.500001 us"></ZoomEndTime>
-      <Cursor1Time time="98.000000 us"></Cursor1Time>
+      <ZoomEndTime time="1,198.395506 us"></ZoomEndTime>
+      <Cursor1Time time="31.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="194"></NameColumnWidth>
-      <ValueColumnWidth column_width="86"></ValueColumnWidth>
+      <ValueColumnWidth column_width="82"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="23" />
    <wvobject type="logic" fp_name="/tb_controller/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
@@ -39,6 +39,18 @@
    <wvobject type="logic" fp_name="/tb_controller/i_mosi">
       <obj_property name="ElementShortName">i_mosi</obj_property>
       <obj_property name="ObjectShortName">i_mosi</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_controller/DUT/I1/i_mosi">
+      <obj_property name="ElementShortName">i_mosi</obj_property>
+      <obj_property name="ObjectShortName">i_mosi</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_controller/DUT/I1/i_sclk">
+      <obj_property name="ElementShortName">i_sclk</obj_property>
+      <obj_property name="ObjectShortName">i_sclk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_controller/DUT/I1/i_ss">
+      <obj_property name="ElementShortName">i_ss</obj_property>
+      <obj_property name="ObjectShortName">i_ss</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/tb_controller/o_miso">
       <obj_property name="ElementShortName">o_miso</obj_property>
@@ -399,7 +411,7 @@
       </wvobject>
    </wvobject>
    <wvobject type="array" fp_name="/tb_controller/o_analog_p">
-      <obj_property name="ElementShortName">o_analog_p[255:0]</obj_property>
-      <obj_property name="ObjectShortName">o_analog_p[255:0]</obj_property>
+      <obj_property name="ElementShortName">o_analog_p[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o_analog_p[31:0]</obj_property>
    </wvobject>
 </wave_config>

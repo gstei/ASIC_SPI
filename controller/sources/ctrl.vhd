@@ -4,7 +4,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-library work;
 use work.ctrl_pkg.all;
 
 entity ctrl is
@@ -41,7 +40,7 @@ begin
         end if;
     end process;
     -- memoryless process
-    p_com: process (o_busy,i_data_from_spi, ctrl_reg, c_st, rst)
+    p_com: process (o_busy,i_data_from_spi, ctrl_reg, c_st)
     begin
     -- default assignments
     n_st <= c_st; -- remain in current state
@@ -67,8 +66,6 @@ begin
         when S3 =>
             if o_busy = '0' then n_st <= S0;
             end if;
-        when others =>
-            n_st <= S0; -- handle parasitic states
     end case;
     end process;
 end rtl;

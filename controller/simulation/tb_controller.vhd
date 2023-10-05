@@ -18,7 +18,7 @@ architecture rtl of tb_controller is
     signal o_miso : std_logic := '0';
     signal o_register : std_logic_vector(2**c_AW*c_DW-1 downto 0) := (others=>'0');
     signal o_analog_p : STD_LOGIC_VECTOR(31 DOWNTO 0);
-    constant clk_period : time := 10 ns;
+    constant clk_period : time := 1000 ns;
     component top
       Port ( 
         clk                         : in std_logic;
@@ -36,7 +36,8 @@ architecture rtl of tb_controller is
         i_ss         : out std_logic;
         i_sclk       : out std_logic;
         i_mosi       : out std_logic;
-        rst          : out std_logic                              -- reset signal for module
+        rst          : out std_logic;                              -- reset signal for module
+        o_register   : in STD_LOGIC_VECTOR(2**c_AW*c_DW-1 downto 0)
     );
     end component;
 begin
@@ -56,7 +57,8 @@ begin
             i_ss         => i_ss,
             i_sclk       => i_sclk,
             i_mosi       => i_mosi,
-            rst          => rst                           -- reset signal for module
+            rst          => rst,                           -- reset signal for module
+            o_register   => o_register
     );
     
     -- Clock process definitions( clock with 50% duty cycle is generated here.

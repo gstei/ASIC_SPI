@@ -3,7 +3,6 @@
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
-LIBRARY work;
 USE work.ctrl_pkg.ALL;
 
 ENTITY top IS
@@ -28,6 +27,9 @@ ARCHITECTURE rtl OF top IS
   SIGNAL spi_to_controller_inverted : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
   SIGNAL controller_to_spi : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
   SIGNAL o_register_s : STD_LOGIC_VECTOR(63 DOWNTO 0);
+  SIGNAL sclk_sync1, sclk_sync2 : STD_LOGIC := '0';
+  SIGNAL ss_sync1, ss_sync2     : STD_LOGIC := '0';
+  SIGNAL mosi_sync1, mosi_sync2 : STD_LOGIC := '0';
 
   --declare components
   COMPONENT ctrl IS
@@ -56,16 +58,74 @@ ARCHITECTURE rtl OF top IS
       o_miso_en : OUT STD_LOGIC);
   END COMPONENT;
 
-  COMPONENT mux IS
-    PORT (
-      input_s : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
-      clk : IN STD_LOGIC;
-      output_s : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
-    );
-  END COMPONENT;
+  component mux
+      port(
+          input_s  : in  std_logic_vector(4 downto 0);
+          clk      : in  std_logic;
+          output_s : out std_logic_vector(31 downto 0)
+      );
+  end component mux;
 
 BEGIN
-  --instanciate components
+  -- First flip-flop stage for Serial Clock (i_sclk)
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            sclk_sync1 <= '0';
+        elsif rising_edge(clk) then
+            sclk_sync1 <= i_sclk;
+        end if;
+    end process;
+
+    -- Second flip-flop stage for Serial Clock (i_sclk)
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            sclk_sync2 <= '0';
+        elsif rising_edge(clk) then
+            sclk_sync2 <= sclk_sync1;
+        end if;
+    end process;
+
+    -- First flip-flop stage for Slave Select (i_ss)
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            ss_sync1 <= '0';
+        elsif rising_edge(clk) then
+            ss_sync1 <= i_ss;
+        end if;
+    end process;
+
+    -- Second flip-flop stage for Slave Select (i_ss)
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            ss_sync2 <= '0';
+        elsif rising_edge(clk) then
+            ss_sync2 <= ss_sync1;
+        end if;
+    end process;
+
+    -- First flip-flop stage for Master Out Slave In (i_mosi)
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            mosi_sync1 <= '0';
+        elsif rising_edge(clk) then
+            mosi_sync1 <= i_mosi;
+        end if;
+    end process;
+
+    -- Second flip-flop stage for Master Out Slave In (i_mosi)
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            mosi_sync2 <= '0';
+        elsif rising_edge(clk) then
+            mosi_sync2 <= mosi_sync1;
+        end if;
+    end process;
   I1 : spi_slave
   GENERIC MAP(
     N => c_DW,
@@ -75,9 +135,9 @@ BEGIN
     o_busy => busy,
     i_data_parallel => controller_to_spi,
     o_data_parallel => spi_to_controller,
-    i_sclk => i_sclk,
-    i_ss => i_ss,
-    i_mosi => i_mosi,
+    i_sclk => sclk_sync2,
+    i_ss => ss_sync2,
+    i_mosi => mosi_sync2,
     o_miso => o_miso,
     o_miso_en => o_miso_en);
 
@@ -96,7 +156,7 @@ BEGIN
 
   mux_inst : mux 
     port map (
-        input_s    => o_register_s(21 downto 16),
+        input_s    => o_register_s(20 downto 16),
         clk        => clk,
         output_s   => o_analog_p
     );
