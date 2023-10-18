@@ -66,14 +66,16 @@ setAttribute -net {*} -top_preferred_routing_layer 3
 # Create floorplan
 # ----------------------------------------------------------
 set coreWidth 1040
-set coreHeight 60
+set coreHeight 100
 set borderWidth 5
 set powerWidth 2
+set stripeWidth 2
 set powerSpacing 1
+set noOfStripeBetween 10
 
 # Calculate border and align to grid
 set coreWidthA [expr {ceil($coreWidth / 1.4) * 1.4}]
-set coreHeightA [expr {floor($coreHeight / 13) * 13}]
+set coreHeightA [expr {floor($coreHeight / 20.8) * 20.8}]
 set borderWidthTB [expr {ceil(($powerWidth * 2 + $powerSpacing + $borderWidth) / 1.3) * 1.3 - $powerWidth * 2 - $powerSpacing}]
 set borderWidthLR [expr {ceil(($powerWidth * 2 + $powerSpacing + $borderWidth) / 1.4) * 1.4 - $powerWidth * 2 - $powerSpacing}]
 set borderWidthTotalTB [expr {$powerWidth * 2 + $powerSpacing + $borderWidthTB}]
@@ -100,6 +102,39 @@ deleteAllPowerPreroutes
 
 # Ring 
 addRing -nets [list ${GROUNDNETS} ${POWERNETS}] -type core_rings -layer {top MET3 bottom MET3 left MET2 right MET2} -width $powerWidth -spacing $powerSpacing -offset 0 -center 0
+
+#
+# Calculate stripes
+set stripeSp2 [expr {($coreWidthA - $borderWidthLR - $powerWidth/2 - $noOfStripeBetween * ($powerSpacing + 2 * $stripeWidth)) / ($noOfStripeBetween + 1)}]
+set stripeSt2 [expr {$borderWidthTotalLR + $stripeSp2}]
+set stripeY2A_G [expr {$borderWidthTB + $powerWidth + $powerSpacing}]
+set stripeY2B_G [expr {$coreHeightA + $borderWidthTotalTB + $powerWidth}]
+set stripeY2A_P [expr {$stripeY2A_G - $powerWidth - $powerSpacing}]
+set stripeY2B_P [expr {$stripeY2B_G + $powerWidth + $powerSpacing}]
+
+# Create via
+set viaStripe3 [add_via_definition -via_rule VIA1_CV2_small -row_col {2 2}]
+set viaStripe4 [add_via_definition -via_rule VIA2_CV2_small -row_col {2 2}]
+
+# Add small stripes
+for {set i 0} {$i < $noOfStripeBetween} {incr i} {
+	set stripeX2_G [expr {round(($stripeSt2 + $i * ($stripeSp2 + $powerSpacing + 2 * $stripeWidth)) / 1.4) * 1.4}]
+	set stripeX2_P [expr {$stripeX2_G + $powerSpacing + $stripeWidth}]
+	add_shape -shape STRIPE -width $stripeWidth -pathSeg ${stripeX2_G} ${stripeY2A_G} ${stripeX2_G} ${stripeY2B_G} -layer MET2 -net ${GROUNDNETS}
+	add_shape -shape STRIPE -width $stripeWidth -pathSeg ${stripeX2_P} ${stripeY2A_P} ${stripeX2_P} ${stripeY2B_P} -layer MET2 -net ${POWERNETS}
+#	add_via -shape STRIPE -net ${GROUNDNETS} -via $viaStripe3 -pt ${stripeX2_P} [expr {${stripeY2A_G}  + $powerWidth / 2}]
+#	add_via -shape STRIPE -net ${GROUNDNETS} -via $viaStripe3 -pt ${stripeX2_P} [expr {${stripeY2B_G}  - $powerWidth / 2}]
+#	add_via -shape STRIPE -net ${POWERNETS} -via $viaStripe3 -pt ${stripeX2_G} [expr {${stripeY2A_P}  + $powerWidth / 2}]
+#	add_via -shape STRIPE -net ${POWERNETS} -via $viaStripe3 -pt ${stripeX2_G} [expr {${stripeY2B_P}  - $powerWidth / 2}]
+	add_via -shape STRIPE -net ${GROUNDNETS} -via $viaStripe4 -pt ${stripeX2_G} [expr {${stripeY2A_G}  + $powerWidth / 2}]
+	add_via -shape STRIPE -net ${GROUNDNETS} -via $viaStripe4 -pt ${stripeX2_G} [expr {${stripeY2B_G}  - $powerWidth / 2}]
+	add_via -shape STRIPE -net ${POWERNETS} -via $viaStripe4 -pt ${stripeX2_P} [expr {${stripeY2A_P}  + $powerWidth / 2}]
+	add_via -shape STRIPE -net ${POWERNETS} -via $viaStripe4 -pt ${stripeX2_P} [expr {${stripeY2B_P}  - $powerWidth / 2}]
+	
+#	createPlaceBlockage -type hard  -box  [expr {${stripeX2_G} - ${stripeWidth}/2}] ${stripeY2A_G}  [expr {${stripeX2_G} + ${stripeWidth}/2}]  ${stripeY2B_G}
+#	createPlaceBlockage -type hard  -box  [expr {${stripeX2_P} - ${stripeWidth}/2}] ${stripeY2A_P}  [expr {${stripeX2_P} + ${stripeWidth}/2}]  ${stripeY2B_P}
+}
+
 
 # ----------------------------------------------------------
 # Connect the power

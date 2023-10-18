@@ -2,10 +2,10 @@
 
 1 4000 ns 2000 ns 0 03 # write AA to register one, this should not work, since it is read only
 1 4000 ns 2000 ns 0 55 # write AA to register one, this should not work, since it is read only
-0 0000000000000003
+0 00000000000003
 1 4000 ns 2000 ns 0 05 # write 02 to register two, this should work
 1 4000 ns 2000 ns 0 02 # write 02 to register two, this should work and outputs bandgap voltage on a_tp
-0 0000000000020005
+0 00000000000205
 1 4000 ns 2000 ns 0 05 # write 03 to register two, this should work
 1 4000 ns 2000 ns 0 03 # write 03 to register two, this should work and output clock on a_tp
 1 4000 ns 2000 ns 0 05 # write 04 to register two, this should work
@@ -18,64 +18,75 @@
 1 4000 ns 2000 ns 0 07 # write 07 to register two, this should work and por on a_tp
 1 4000 ns 2000 ns 0 09 # write AA to register four, this should work
 1 4000 ns 2000 ns 0 AA # write AA to register four, this should work
-0 000000AA00070009
+0 000000AA000709
 1 4000 ns 2000 ns 1 00 # make a reset
 1 4000 ns 2000 ns 0 00 # make a reset
-0 000000AA00070000 # Data should be the same after reset
+0 000000AA000700 # Data should be the same after reset
 1 4000 ns 2000 ns 0 0B # write AA to register five, this should work
 1 4000 ns 2000 ns 0 AA # write AA to register five, this should work
-0 0000AAAA0007000B # 
+0 0000AAAA00070B # 
 1 4000 ns 2000 ns 0 0D # write AA to register six, this should work
 1 4000 ns 2000 ns 0 AA # write AA to register six, this should work
-0 00AAAAAA0007000D # 
+0 00AAAAAA00070D # 
 1 4000 ns 2000 ns 0 0F # write AA to register seven, this should work
 1 4000 ns 2000 ns 0 AA # write AA to register seven, this should work
-0 AAAAAAAA0007000F # 
+0 AAAAAAAA00070F # 
 1 4000 ns 2000 ns 0 07 # write AA to register three, this should work
 1 4000 ns 2000 ns 0 AA # write AA to register three, this should work
-0 AAAAAAAAAA070007 # 
+0 AAAAAAAAAA0707 # 
 1 4000 ns 2000 ns 0 05 # write AA to register two, this should work
 1 4000 ns 2000 ns 0 AA # write AA to register two, this should work
-0 AAAAAAAAAAAA0005 # 
+0 AAAAAAAAAAAA05 # 
 
 
 
 
 1 4000 ns 2000 ns 0 05 # write 00 to register two, this should work
 1 4000 ns 2000 ns 0 00 # write 00 to register two, this should work
-0 AAAAAAAAAA000005 # 
+0 AAAAAAAAAA0005 # 
 1 4000 ns 2000 ns 0 07 # write 00 to register three, this should work
 1 4000 ns 2000 ns 0 00 # write 00 to register three, this should work
-0 AAAAAAAA00000007 # 
+0 AAAAAAAA000007 # 
 1 4000 ns 2000 ns 0 09 # write 00 to register four, this should work
 1 4000 ns 2000 ns 0 00 # write 00 to register four, this should work
-0 AAAAAA0000000009 # 
+0 AAAAAA00000009 # 
 1 4000 ns 2000 ns 0 0B # write 00 to register five, this should work
 1 4000 ns 2000 ns 0 00 # write 00 to register five, this should work
-0 AAAA00000000000B # 
+0 AAAA000000000B # 
 1 4000 ns 2000 ns 0 0D # write 00 to register six, this should work
 1 4000 ns 2000 ns 0 00 # write 00 to register six, this should work
-0 AA0000000000000D # 
+0 AA00000000000D # 
 1 4000 ns 2000 ns 0 0F # write 00 to register seven, this should work
 1 4000 ns 2000 ns 0 00 # write 00 to register seven, this should work
-0 000000000000000F # 
+0 0000000000000F # 
 
 
+
 1 4001 ns 2000 ns 0 0F # write AA to register seven, this should work
 1 4001 ns 2000 ns 0 AA # write AA to register seven, this should work
-0 AA0000000000000F # 
+0 AA00000000000F # 
 1 4001 ns 2000 ns 0 0F # write 00 to register seven, this should work
 1 4001 ns 2000 ns 0 00 # write 00 to register seven, this should work
-0 000000000000000F # 
+0 0000000000000F # 
 1 4001 ns 2000 ns 0 0F # write AA to register seven, this should work
 1 4001 ns 2000 ns 0 AA # write AA to register seven, this should work
-0 AA0000000000000F # 
+0 AA00000000000F # 
 1 4001 ns 2000 ns 0 0F # write 00 to register seven, this should work
 1 4001 ns 2000 ns 0 00 # write 00 to register seven, this should work
-0 000000000000000F # 
+0 0000000000000F # 
 1 4001 ns 2000 ns 0 0F # write AA to register seven, this should work
 1 4001 ns 2000 ns 0 AA # write AA to register seven, this should work
-0 AA0000000000000F # 
+0 AA00000000000F # 
 1 4001 ns 2000 ns 0 0F # write 00 to register seven, this should work
 1 4001 ns 2000 ns 0 00 # write 00 to register seven, this should work
-0 000000000000000F # 
+0 0000000000000F # 
+1 4001 ns 2000 ns 0 02 # read register 1
+1 4001 ns 2000 ns 0 00 # do not send anything
+0 00000000000002 # 
+1 4001 ns 2000 ns 0 02 # read register 1
+1 4001 ns 2000 ns 0 00 # do not send anything
+0 00000000000002 # 
+2 AA
+1 4001 ns 2000 ns 0 02 # read register 1
+1 4001 ns 2000 ns 0 00 # do not send anything
+0 00000000000002 # 

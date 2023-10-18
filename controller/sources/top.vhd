@@ -17,7 +17,8 @@ ENTITY top IS
     o_miso : OUT STD_LOGIC;
     o_miso_en : OUT STD_LOGIC;
     --o_register                  : out std_logic_vector(2**c_AW*c_DW-1 downto 0)
-    o_register : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+    o_register : OUT STD_LOGIC_VECTOR(55 DOWNTO 0);
+    i_register : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
     o_analog_p : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
   );
 END top;
@@ -26,10 +27,11 @@ ARCHITECTURE rtl OF top IS
   SIGNAL spi_to_controller : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
   SIGNAL spi_to_controller_inverted : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
   SIGNAL controller_to_spi : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
-  SIGNAL o_register_s : STD_LOGIC_VECTOR(63 DOWNTO 0);
+  SIGNAL o_register_s : STD_LOGIC_VECTOR(55 DOWNTO 0);
   SIGNAL sclk_sync1, sclk_sync2 : STD_LOGIC := '0';
   SIGNAL ss_sync1, ss_sync2     : STD_LOGIC := '0';
   SIGNAL mosi_sync1, mosi_sync2 : STD_LOGIC := '0';
+  SIGNAL i_register_sync1, i_register_sync2 : STD_LOGIC_VECTOR(7 DOWNTO 0) := (others => '0');
 
   --declare components
   COMPONENT ctrl IS
@@ -40,7 +42,8 @@ ARCHITECTURE rtl OF top IS
       i_data_from_spi : IN STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0); -- data to send to spi
       clk : IN STD_LOGIC;
       rst : IN STD_LOGIC;
-      o_register : OUT STD_LOGIC_VECTOR(2 ** c_AW * c_DW - 1 DOWNTO 0)
+      o_register : OUT STD_LOGIC_VECTOR(55 DOWNTO 0);
+      i_register : IN STD_LOGIC_VECTOR(7 DOWNTO 0)
     );
   END COMPONENT;
   COMPONENT spi_slave IS
@@ -126,6 +129,29 @@ BEGIN
             mosi_sync2 <= mosi_sync1;
         end if;
     end process;
+    
+    -- First flip-flop stage for a_data
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            i_register_sync1 <= (others => '0');
+        elsif rising_edge(clk) then
+            i_register_sync1 <= i_register;
+        end if;
+    end process;
+
+    -- Second flip-flop stage for a_data
+    process (clk, rst)
+    begin
+        if rst = '1' then
+            i_register_sync2 <= (others => '0');
+        elsif rising_edge(clk) then
+            i_register_sync2 <= i_register_sync1;
+        end if;
+    end process;
+    
+    
+    
   I1 : spi_slave
   GENERIC MAP(
     N => c_DW,
@@ -152,7 +178,8 @@ BEGIN
     i_data_from_spi => spi_to_controller_inverted,
     clk => clk,
     rst => rst,
-    o_register => o_register_s);
+    o_register => o_register_s,
+    i_register => i_register_sync2);
 
   mux_inst : mux 
     port map (

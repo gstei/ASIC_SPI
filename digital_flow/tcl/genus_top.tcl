@@ -70,6 +70,7 @@ set_attribute slew {5000 5000 5000 5000} CLK_ext
 
 # Signals are synchronous to the clock
 external_delay -clock CLK_ext -input 0 [get_ports rst] 
+external_delay -clock CLK_ext -input 0 [get_ports i_register] 
 external_delay -clock CLK_ext -input 0 [get_ports i_sclk] 
 external_delay -clock CLK_ext -input 0 [get_ports i_ss]
 external_delay -clock CLK_ext -input 0 [get_ports i_mosi]
@@ -80,6 +81,7 @@ external_delay -clock CLK_ext -input 0 [get_ports i_mosi]
 
 # Slew rate on input pins
 set_input_transition 0 [get_ports rst]
+set_input_transition 0 [get_ports i_register]
 set_input_transition 5000 [get_ports i_sclk]
 set_input_transition 5000 [get_ports i_ss]
 set_input_transition 5000 [get_ports i_mosi]

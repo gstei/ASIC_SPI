@@ -15,14 +15,14 @@ end mux;
 
 architecture rtl of mux is
     signal prev_input_s: std_logic_vector(4 downto 0);
-    signal delay_line : std_logic_vector(7 downto 0) := (others => '0');
+    signal delay_line : std_logic_vector(1 downto 0) := (others => '0');
 begin
     process(clk)
         variable bit_position: integer range 0 to 31;
     begin
         if rising_edge(clk) then
             if input_s /= prev_input_s then
-                if delay_line < x"03" then
+                if delay_line < "11" then
                     output_s <= (others => '1');
                     delay_line <= std_logic_vector(unsigned(delay_line) + 1);
                 else

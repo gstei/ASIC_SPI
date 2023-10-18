@@ -15,7 +15,7 @@ constant c_AW               : integer := 3;     --Number of Registers = 2**AW
 constant c_DW               : integer := 8;     --Data width of a Register
 constant c_MSB_LSB          : std_logic := '0';   --MSB first(0) or LSB(1) first
 constant SIMVECTOR_PATH     : string := "";
-type t_register is array (0 to 2**c_AW-1) of
+type t_register is array (0 to 7) of
     std_logic_vector(c_DW-1 downto 0);
 function reverse_any_vector (a: in std_logic_vector) return std_logic_vector;
 function to_slv(slvv : t_register) return STD_LOGIC_VECTOR;
