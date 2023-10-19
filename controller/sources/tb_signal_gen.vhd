@@ -48,8 +48,10 @@ begin
         i_ss <= '1';
         i_sclk <= '0';
         i_mosi <= '0';
-        rst <= '0';
+        rst <= '1';
         i_register <= a_data;
+        wait for 30 us;
+        rst <= '1';
         wait for 30 us;
         while not endfile(text_file) loop
             readline(text_file, text_line);

@@ -23,15 +23,15 @@ ENTITY top IS
   );
 END top;
 ARCHITECTURE rtl OF top IS
-  SIGNAL busy : STD_LOGIC := '0'; --when 1 then data is transmitted over spi
+  SIGNAL busy : STD_LOGIC; --when 1 then data is transmitted over spi
   SIGNAL spi_to_controller : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
   SIGNAL spi_to_controller_inverted : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
   SIGNAL controller_to_spi : STD_LOGIC_VECTOR(c_DW - 1 DOWNTO 0);
   SIGNAL o_register_s : STD_LOGIC_VECTOR(55 DOWNTO 0);
-  SIGNAL sclk_sync1, sclk_sync2 : STD_LOGIC := '0';
-  SIGNAL ss_sync1, ss_sync2     : STD_LOGIC := '0';
-  SIGNAL mosi_sync1, mosi_sync2 : STD_LOGIC := '0';
-  SIGNAL i_register_sync1, i_register_sync2 : STD_LOGIC_VECTOR(7 DOWNTO 0) := (others => '0');
+  SIGNAL sclk_sync1, sclk_sync2 : STD_LOGIC;
+  SIGNAL ss_sync1, ss_sync2     : STD_LOGIC;
+  SIGNAL mosi_sync1, mosi_sync2 : STD_LOGIC;
+  SIGNAL i_register_sync1, i_register_sync2 : STD_LOGIC_VECTOR(7 DOWNTO 0);
 
   --declare components
   COMPONENT ctrl IS
@@ -57,6 +57,8 @@ ARCHITECTURE rtl OF top IS
       i_sclk : IN STD_LOGIC;
       i_ss : IN STD_LOGIC;
       i_mosi : IN STD_LOGIC;
+      clk : in  std_logic;
+      rst : in  std_logic;
       o_miso : OUT STD_LOGIC;
       o_miso_en : OUT STD_LOGIC);
   END COMPONENT;
@@ -65,6 +67,7 @@ ARCHITECTURE rtl OF top IS
       port(
           input_s  : in  std_logic_vector(4 downto 0);
           clk      : in  std_logic;
+          rst      : in  std_logic;
           output_s : out std_logic_vector(31 downto 0)
       );
   end component mux;
@@ -94,7 +97,7 @@ BEGIN
     process (clk, rst)
     begin
         if rst = '1' then
-            ss_sync1 <= '0';
+            ss_sync1 <= '1';
         elsif rising_edge(clk) then
             ss_sync1 <= i_ss;
         end if;
@@ -104,7 +107,7 @@ BEGIN
     process (clk, rst)
     begin
         if rst = '1' then
-            ss_sync2 <= '0';
+            ss_sync2 <= '1';
         elsif rising_edge(clk) then
             ss_sync2 <= ss_sync1;
         end if;
@@ -164,6 +167,8 @@ BEGIN
     i_sclk => sclk_sync2,
     i_ss => ss_sync2,
     i_mosi => mosi_sync2,
+    clk => clk,
+    rst=> rst,
     o_miso => o_miso,
     o_miso_en => o_miso_en);
 
@@ -185,6 +190,7 @@ BEGIN
     port map (
         input_s    => o_register_s(20 downto 16),
         clk        => clk,
+        rst        => rst,
         output_s   => o_analog_p
     );
 

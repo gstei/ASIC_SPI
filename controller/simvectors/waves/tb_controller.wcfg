@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
-      <ZoomEndTime time="5,000.000001 us"></ZoomEndTime>
-      <Cursor1Time time="1,262.016000 us"></Cursor1Time>
+      <ZoomEndTime time="311.645757 us"></ZoomEndTime>
+      <Cursor1Time time="107.500000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="186"></NameColumnWidth>
+      <NameColumnWidth column_width="162"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="26" />
+   <WVObjectSize size="33" />
    <wvobject type="logic" fp_name="/tb_controller/rst">
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
@@ -418,13 +418,41 @@
       <obj_property name="ElementShortName">o_data_to_spi[7:0]</obj_property>
       <obj_property name="ObjectShortName">o_data_to_spi[7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_controller/DUT/I2/ctrl_reg">
-      <obj_property name="ElementShortName">ctrl_reg[0:63][7:0]</obj_property>
-      <obj_property name="ObjectShortName">ctrl_reg[0:63][7:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/tb_controller/DUT/i_register_sync2">
       <obj_property name="ElementShortName">i_register_sync2[7:0]</obj_property>
       <obj_property name="ObjectShortName">i_register_sync2[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_controller/DUT/I1/i_data_parallel">
+      <obj_property name="ElementShortName">i_data_parallel[7:0]</obj_property>
+      <obj_property name="ObjectShortName">i_data_parallel[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_controller/DUT/I1/i_data_parallel">
+      <obj_property name="ElementShortName">i_data_parallel[7:0]</obj_property>
+      <obj_property name="ObjectShortName">i_data_parallel[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_controller/DUT/I1/r_tx_data">
+      <obj_property name="ElementShortName">r_tx_data[6:0]</obj_property>
+      <obj_property name="ObjectShortName">r_tx_data[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_controller/DUT/I1/r_rx_data">
+      <obj_property name="ElementShortName">r_rx_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_rx_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_controller/DUT/I1/o_busy">
+      <obj_property name="ElementShortName">o_busy</obj_property>
+      <obj_property name="ObjectShortName">o_busy</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/tb_controller/DUT/I2/c_st">
+      <obj_property name="ElementShortName">c_st</obj_property>
+      <obj_property name="ObjectShortName">c_st</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_controller/DUT/I1/r_shift_ena">
+      <obj_property name="ElementShortName">r_shift_ena</obj_property>
+      <obj_property name="ObjectShortName">r_shift_ena</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_controller/DUT/I1/i_ss">
+      <obj_property name="ElementShortName">i_ss</obj_property>
+      <obj_property name="ObjectShortName">i_ss</obj_property>
    </wvobject>
 </wave_config>

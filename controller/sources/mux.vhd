@@ -9,18 +9,22 @@ entity mux is
     Port (
         input_s : in std_logic_vector(4 downto 0);
         clk : in std_logic;
+        rst : in std_logic;
         output_s : out std_logic_vector(31 downto 0)
     );
 end mux;
 
 architecture rtl of mux is
     signal prev_input_s: std_logic_vector(4 downto 0);
-    signal delay_line : std_logic_vector(1 downto 0) := (others => '0');
+    signal delay_line : std_logic_vector(1 downto 0);
 begin
-    process(clk)
+    process(clk, rst)
         variable bit_position: integer range 0 to 31;
     begin
-        if rising_edge(clk) then
+        if rst = '1' then
+            prev_input_s <= (others => '0');
+            delay_line <= (others => '0');
+        elsif rising_edge(clk) then
             if input_s /= prev_input_s then
                 if delay_line < "11" then
                     output_s <= (others => '1');

@@ -26,8 +26,8 @@ architecture rtl of ctrl is
     type state is (S0, S1, S2, S3);
     signal c_st, n_st : state;
     --define ctrl_reg
-    signal ctrl_reg_ps : t_register := ((others=> (others=>'0')));
-    signal ctrl_reg_ns : t_register := ((others=> (others=>'0')));
+    signal ctrl_reg_ps : t_register;
+    signal ctrl_reg_ns : t_register;
     signal slv56 : std_logic_vector(55 downto 0);
 begin
     --
