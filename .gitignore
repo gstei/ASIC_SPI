@@ -4,6 +4,9 @@
 
 *.Xil/*
 .library_mapping.xml
+vish_stacktrace.vstf
+vopt_stacktrace.vstf
+vsim.wlf
 .project
 .settings/*
 *.hsr.ch
