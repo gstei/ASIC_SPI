@@ -40,8 +40,6 @@ begin
         if rst = '1' then
             c_st <= S0;
             ctrl_reg_ps <= (others=> (others=>'0'));
-            --ctrl_reg_ns <= (others=> (others=>'0'));
---            ctrl_reg <= (others=> (others=>'0'));
         elsif rising_edge(clk) then
             c_st <= n_st;
             ctrl_reg_ps <= ctrl_reg_ns;

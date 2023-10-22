@@ -2,7 +2,7 @@
 # Info and path setup
 #-------------------------------------------------------------------------------
 set DESIGN  "top"
-set LIBRARY "Lib1"
+set LIBRARY "Lib1_digital"
 set DATE [clock format [clock seconds] -format "%b%d-%T"] 
 set OUTPUTS_PATH ../results/par
 set OUTPUTS_PATH_SYNTH ../results/synth

@@ -4,6 +4,7 @@ use IEEE.NUMERIC_STD.ALL;
 use IEEE.std_logic_textio.ALL;
 use STD.textio.ALL;
 use work.ctrl_pkg.all;
+--- -coverage -voptargs=+cover -t ps -sdfmin /DUT/=/mnt/imesl/Projects/MSE_PA_Jansky_Meyer/digital/digital_flow/results/par/top.sdf
 
 
 entity tb_signal_gen is

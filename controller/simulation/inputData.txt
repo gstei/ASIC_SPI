@@ -2,7 +2,7 @@
 
 
 
-0 00000000000000 # Data should be everywhere zero
+#0 00000000000000 # Data should be everywhere zero
 1 8000 ns 4000 ns 0 03 # write AA to register one, this should not work, since it is read only
 1 8000 ns 4000 ns 0 55 # write 55 to register one, this should not work, since it is read only
 0 00000000000003
