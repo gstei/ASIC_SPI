@@ -54,11 +54,13 @@ end process p_spi_slave_input;
 
 p_spi_slave_output : process(clk,rst, i_ss)
 begin
-    o_miso                  <= '0';
+    
     if rst ='1' then
       r_tx_data <= (others => '0');
       r_shift_ena <= '0';
       spi_clk_prev_o <= '0';
+      o_miso                  <= '0';
+      o_miso_en               <= '0';
     elsif(i_ss='1') then
         r_shift_ena             <= '0';
         o_miso                  <= '0';

@@ -137,6 +137,8 @@ begin
                     wait for wait_time2/2;
                     i_sclk <= '0';  
                     wait for wait_time2/2;
+                    wait for wait_time2/2;
+                    wait for wait_time2/2;
                     i_ss <= '1';--slave select to one (stop sequence)
                     
                     

@@ -24,6 +24,7 @@ begin
         if rst = '1' then
             prev_input_s <= (others => '0');
             delay_line <= (others => '0');
+            output_s <= (others => '1');
         elsif rising_edge(clk) then
             if input_s /= prev_input_s then
                 if delay_line < "11" then
