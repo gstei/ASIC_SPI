@@ -52,7 +52,7 @@ begin
         rst <= '1';
         i_register <= a_data;
         wait for 30 us;
-        rst <= '1';
+        rst <= '0';
         wait for 30 us;
         while not endfile(text_file) loop
             readline(text_file, text_line);
@@ -161,6 +161,15 @@ begin
                     i_register <= a_data;
                     report "i_register: " & hstr(a_data);
                     wait for clk_period*3;
+                elsif command = "0011" then
+                    read(text_line, wait_time, ok);
+                    assert ok
+                        report "Read 'wait_time' failed for line " & text_line.all
+                        severity failure;
+                    rst<= '1';
+                    wait for wait_time;
+                    rst <= '0';
+                    wait for wait_time;
                 end if;
                 --Print trailing comment to console, if any
                 read(text_line, char, ok);-- Skip expected newline
